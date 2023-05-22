@@ -1,11 +1,10 @@
 "use client";
 import React from "react";
-import { IoSend } from "react-icons/io5";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 
-
+import { IoSend } from "react-icons/io5";
 
 type taskType = {
   listid: number;
@@ -13,11 +12,9 @@ type taskType = {
   status: boolean;
 };
 
-const ListComp = ({toast}) => {
-
-  const [isLoading, setIsLoading] = useState(false)
-  const {refresh} = useRouter()
-
+const ListComp = ({ toast }) => {
+  const [isLoading, setIsLoading] = useState(false);
+  const { refresh } = useRouter();
 
   //BELOW CODE TO INSERT TASKS
   const [task, setTask] = useState<taskType>({
@@ -25,36 +22,33 @@ const ListComp = ({toast}) => {
     description: "",
     status: false,
   });
-  
+
   const handleChange = (e: any) => {
     setTask({ ...task, [e.target.name]: e.target.value });
   };
-  
-  const handleSubmit = async (e:any) => {
-    
-    e.preventDefault()
-    setIsLoading(true)
-    if(task.description === ""){
-      toast.error("Please enter a task")
-      setIsLoading(false)
-      return
+
+  const handleSubmit = async (e: any) => {
+    e.preventDefault();
+    setIsLoading(true);
+    if (task.description === "") {
+      toast.error("Please enter a task");
+      setIsLoading(false);
+      return;
     }
     try {
       const response = await fetch("/api/tasks", {
         method: "POST",
         body: JSON.stringify(task),
       });
-      if(response.ok){
-        setTask({ ...task, description:""})
-        toast("✔️ Task added successfully")
-        refresh()
-        
-      }else{
-        toast.error("Task not added")
-        throw new Error("Something went wrong at Server")
+      if (response.ok) {
+        setTask({ ...task, description: "" });
+        toast("✔️ Task added successfully");
+        refresh();
+      } else {
+        toast.error("Task not added");
+        throw new Error("Something went wrong at Server");
       }
-      setIsLoading(false)
-      
+      setIsLoading(false);
     } catch (error) {
       console.log(error);
     }
@@ -76,9 +70,17 @@ const ListComp = ({toast}) => {
           type="submit"
           disabled={task.description === "" || isLoading ? true : false}
           className={`bg-black  bg-opacity-50 rounded-full px-3 py-3 shrink-0 text-white  transition-all duration-300 
-          ${ isLoading === true || task.description === "" ? "opacity-50 cursor-not-allowed hover:scale-100" : "hover:scale-110 hover:text-primaryOrange hover:bg-white"}`}
+          ${
+            isLoading === true || task.description === ""
+              ? "opacity-50 cursor-not-allowed hover:scale-100"
+              : "hover:scale-110 hover:text-primaryOrange hover:bg-white"
+          }`}
         >
-         { isLoading ? <Image src="/loading.svg" width={25} height={25} alt="loading" />  : <IoSend className="text-2xl  " />}
+          {isLoading ? (
+            <Image src="/loading.svg" width={25} height={25} alt="loading" />
+          ) : (
+            <IoSend className="text-2xl  " />
+          )}
         </button>
       </form>
       <div className="bg-black  h-1 w-40 rounded-xl mt-4"></div>

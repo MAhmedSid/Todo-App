@@ -1,18 +1,20 @@
 import React from "react";
+
 import AddTask from "./AddTask";
 import List from "../atoms/List";
-import { Task } from "../../lib/drizzle";
 import Heading from "../atoms/Heading";
-import { toast, ToastContainer } from "react-toastify";
-import { Roboto } from "next/font/google";
-import {BASE_URL} from "../../config"
+import { BASE_URL } from "../../config";
 
+
+import { Roboto } from "next/font/google";
+import { Task } from "../../lib/drizzle";
+import { toast, ToastContainer } from "react-toastify";
 
 const roboto = Roboto({
   weight: "400",
   style: "normal",
   subsets: ["latin"],
-  preload: true 
+  preload: true,
 });
 
 const getData = async () => {
@@ -39,7 +41,9 @@ export const TodoComp = async () => {
   const data: Task[] = await getData();
 
   return (
-    <div className={`${roboto.className} flex flex-col justify-center items-center gap-y-4 mx-4 md:mx-0`}>
+    <div
+      className={`${roboto.className} flex flex-col justify-center items-center gap-y-4 mx-4 md:mx-0`}
+    >
       <Heading />
       <div className="md:w-96 bg-black text-black backdrop-blur-lg shadow-xl bg-opacity-50 rounded-2xl flex flex-col items-center p-4">
         {/* @ts-ignore */}

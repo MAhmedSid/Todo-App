@@ -1,9 +1,11 @@
 "use client";
 
-import React, { useState,useTransition,useEffect } from "react";
+import React, { useState, useTransition, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { Reorder } from "framer-motion"
+
 import { Task } from "../../lib/drizzle";
+
+import { Reorder } from "framer-motion";
 import { TiDeleteOutline } from "react-icons/ti";
 
 const List = ({ data, toast }: { data: Task[]; toast: any }) => {
@@ -14,11 +16,9 @@ const List = ({ data, toast }: { data: Task[]; toast: any }) => {
 
   const isMutating = isPending || isDeleting;
 
-
-
   useEffect(() => {
-    setItems(data)
-  }, [data])
+    setItems(data);
+  }, [data]);
 
   const deleteTask = async (taskid: number) => {
     try {
@@ -28,8 +28,8 @@ const List = ({ data, toast }: { data: Task[]; toast: any }) => {
       });
       if (res.ok) {
         startTransition(() => {
-          router.refresh()
-        })
+          router.refresh();
+        });
         toast("✔️ Note Deleted Successfully", {
           position: "top-right",
           autoClose: 5000,
@@ -55,7 +55,9 @@ const List = ({ data, toast }: { data: Task[]; toast: any }) => {
       <Reorder.Group
         axis="y"
         values={items}
-        onReorder={setItems} className="flex flex-col h-96 w-full gap-y-3 overflow-y-scroll mb-4 px-2  scrollbar-track-transparent scrollbar-thumb-rounded-lg scrollbar scrollbar-thumb-white">
+        onReorder={setItems}
+        className="flex flex-col h-96 w-full gap-y-3 overflow-y-scroll mb-4 px-2  scrollbar-track-transparent scrollbar-thumb-rounded-lg scrollbar scrollbar-thumb-white"
+      >
         {items.map((task: Task) => (
           <Reorder.Item
             value={task}
