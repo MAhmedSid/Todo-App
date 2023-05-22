@@ -1,4 +1,6 @@
 import './globals.css'
+import 'react-toastify/dist/ReactToastify.css';
+
 import { Inter } from 'next/font/google'
 
 const inter = Inter({ subsets: ['latin'] })
@@ -15,7 +17,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`${inter.className} background`}>{children}</body>
+      <body  className={`${inter.className} background`}>
+        {children}
+      
+        </body>
     </html>
   )
 }

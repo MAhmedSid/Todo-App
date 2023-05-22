@@ -1,26 +1,63 @@
-"use client";
-import React, { useState } from "react";
-import TaskComp from "./TaskComp";
+import React from "react";
+import AddTask from "./AddTask";
+import List from "../atoms/List";
+import { Task } from "../../lib/drizzle";
+import Heading from "../atoms/Heading";
+import { toast, ToastContainer } from "react-toastify";
+import { Roboto } from "next/font/google";
 
-export const TodoComp = () => {
-  const [showLists, setShowLists] = useState(false);
+
+const roboto = Roboto({
+  weight: "400",
+  style: "normal",
+  subsets: ["latin"],
+  preload: true
+});
+
+const getData = async () => {
+  try {
+    const res = await fetch("http://localhost:3000/api/tasks", {
+      method: "GET",
+      cache: "no-store",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    if (!res.ok) {
+      throw new Error("Something went wrong");
+    }
+    const result = await res.json();
+    const data = result.data.reverse();
+    return data;
+  } catch (error) {
+    console.log((error as { message: string }).message);
+  }
+};
+
+export const TodoComp = async () => {
+  const data: Task[] = await getData();
 
   return (
-    <div className="flex flex-col justify-center items-center gap-y-4">
-
-      <div className="flex w-full justify-between">
-        <button
-          className="bg-black bg-opacity-70 text-base py-2 px-3 rounded-full"
-          disabled={true}
-        >
-          Select List
-        </button>
-        <h1 className="text-4xl">DUDE{"'"}S TODO</h1>
+    <div className={`${roboto.className} flex flex-col justify-center items-center gap-y-4 mx-4 md:mx-0`}>
+      <Heading />
+      <div className="md:w-96 bg-black text-black backdrop-blur-lg shadow-xl bg-opacity-50 rounded-2xl flex flex-col items-center p-4">
+        {/* @ts-ignore */}
+        <List data={data} toast={toast} />
+        <AddTask toast={toast} />
       </div>
-
-      {showLists ? "" : <TaskComp />}
-
-
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        limit={3}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
     </div>
   );
 };
