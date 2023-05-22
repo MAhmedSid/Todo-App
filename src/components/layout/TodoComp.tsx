@@ -1,3 +1,5 @@
+"use client"
+
 import React from "react";
 
 import AddTask from "./AddTask";
@@ -19,7 +21,8 @@ const roboto = Roboto({
 
 const getData = async () => {
   try {
-    const res = await fetch(`${BASE_URL}`, {
+   
+    const res = await fetch(`/api/tasks`, {
       method: "GET",
       cache: "no-store",
       headers: {
