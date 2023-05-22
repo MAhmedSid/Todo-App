@@ -8,8 +8,6 @@ import { Roboto } from "next/font/google";
 import {BASE_URL} from "../../config"
 
 
-// const url = process.env.NEXT_PUBLIC_API_URL ;
-
 const roboto = Roboto({
   weight: "400",
   style: "normal",
@@ -19,7 +17,6 @@ const roboto = Roboto({
 
 const getData = async () => {
   try {
-
     const res = await fetch(`${BASE_URL}/api/tasks`, {
       method: "GET",
       cache: "no-store",
