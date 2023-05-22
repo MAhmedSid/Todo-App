@@ -12,7 +12,7 @@ const roboto = Roboto({
   weight: "400",
   style: "normal",
   subsets: ["latin"],
-  preload: true
+  preload: true 
 });
 
 const getData = async () => {
