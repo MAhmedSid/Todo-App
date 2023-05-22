@@ -17,7 +17,7 @@ const roboto = Roboto({
 
 const getData = async () => {
   try {
-    const res = await fetch(`${BASE_URL}/api/tasks`, {
+    const res = await fetch(`${BASE_URL}`, {
       method: "GET",
       cache: "no-store",
       headers: {
