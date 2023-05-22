@@ -5,8 +5,10 @@ import { Task } from "../../lib/drizzle";
 import Heading from "../atoms/Heading";
 import { toast, ToastContainer } from "react-toastify";
 import { Roboto } from "next/font/google";
+import {BASE_URL} from "../../config"
 
-const url = process.env.NEXT_PUBLIC_API_URL ;
+
+// const url = process.env.NEXT_PUBLIC_API_URL ;
 
 const roboto = Roboto({
   weight: "400",
@@ -18,7 +20,7 @@ const roboto = Roboto({
 const getData = async () => {
   try {
 
-    const res = await fetch( url , {
+    const res = await fetch(`${BASE_URL}/api/tasks`, {
       method: "GET",
       cache: "no-store",
       headers: {
