@@ -41,7 +41,7 @@ const getData = async () => {
 };
 
 export const TodoComp = async () => {
-  // const data: Task[] = await getData();
+  const data: Task[] = await getData();
 
   return (
     <div
@@ -50,7 +50,7 @@ export const TodoComp = async () => {
       <Heading />
       <div className="md:w-96 bg-black text-black backdrop-blur-lg shadow-xl bg-opacity-50 rounded-2xl flex flex-col items-center p-4">
         {/* @ts-ignore */}
-        <List data={[]} toast={toast} />
+        <List data={data} toast={toast} />
         <AddTask toast={toast} />
       </div>
       <ToastContainer
