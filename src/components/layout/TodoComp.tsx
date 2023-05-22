@@ -6,7 +6,7 @@ import Heading from "../atoms/Heading";
 import { toast, ToastContainer } from "react-toastify";
 import { Roboto } from "next/font/google";
 
-const url = process.env.NEXT_PUBLIC_API_URL;
+const url = process.env.NEXT_PUBLIC_API_URL ;
 
 const roboto = Roboto({
   weight: "400",
