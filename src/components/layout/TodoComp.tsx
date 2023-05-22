@@ -21,8 +21,8 @@ const roboto = Roboto({
 
 const getData = async () => {
   try {
-   
-    const res = await fetch(`/api/tasks`, {
+    console.log(BASE_URL)
+    const res = await fetch(`${BASE_URL}/api/tasks`, {
       method: "GET",
       cache: "no-store",
       headers: {
@@ -41,7 +41,7 @@ const getData = async () => {
 };
 
 export const TodoComp = async () => {
-  const data: Task[] = await getData();
+  // const data: Task[] = await getData();
 
   return (
     <div
@@ -50,7 +50,7 @@ export const TodoComp = async () => {
       <Heading />
       <div className="md:w-96 bg-black text-black backdrop-blur-lg shadow-xl bg-opacity-50 rounded-2xl flex flex-col items-center p-4">
         {/* @ts-ignore */}
-        <List data={data} toast={toast} />
+        <List data={[]} toast={toast} />
         <AddTask toast={toast} />
       </div>
       <ToastContainer
