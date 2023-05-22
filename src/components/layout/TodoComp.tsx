@@ -6,6 +6,7 @@ import Heading from "../atoms/Heading";
 import { toast, ToastContainer } from "react-toastify";
 import { Roboto } from "next/font/google";
 
+const url = process.env.TASKS_API_URL;
 
 const roboto = Roboto({
   weight: "400",
@@ -16,7 +17,8 @@ const roboto = Roboto({
 
 const getData = async () => {
   try {
-    const res = await fetch("http://localhost:3000/api/tasks", {
+    console.log(url)
+    const res = await fetch( url , {
       method: "GET",
       cache: "no-store",
       headers: {
