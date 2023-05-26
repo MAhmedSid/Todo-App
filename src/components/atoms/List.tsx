@@ -61,7 +61,7 @@ const List = ({ data, toast }: { data: Task[]; toast: any }) => {
         onReorder={setItems}
         className="flex flex-col h-96 w-full gap-y-3 overflow-y-scroll mb-4 px-2  scrollbar-track-transparent scrollbar-thumb-rounded-lg scrollbar scrollbar-thumb-white"
       >
-        {data.map((task: Task) => (
+        {items.map((task: Task) => (
           <Reorder.Item
             value={task}
             key={task.id}
