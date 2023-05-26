@@ -1,11 +1,9 @@
-"use client"
-
 import React from "react";
 
 import AddTask from "./AddTask";
 import List from "../atoms/List";
 import Heading from "../atoms/Heading";
-import { BASE_URL } from "../../config";
+
 
 
 import { Roboto } from "next/font/google";
@@ -21,8 +19,8 @@ const roboto = Roboto({
 
 const getData = async () => {
   try {
-    console.log(BASE_URL)
-    const res = await fetch(`${BASE_URL}/api/tasks`, {
+    console.log(process.env.BASE_URL)
+    const res = await fetch(`${process.env.BASE_URL}/api/tasks`, {
       method: "GET",
       cache: "no-store",
       headers: {
