@@ -6,7 +6,7 @@ import Heading from "../atoms/Heading";
 
 
 
-import { Roboto } from "next/font/google";
+import { Roboto } from "next/font/google"
 import { Task } from "../../lib/drizzle";
 import { toast, ToastContainer } from "react-toastify";
 
