@@ -20,7 +20,7 @@ const roboto = Roboto({
 const getData = async () => {
   try {
     console.log(process.env.BASE_URL)
-    const res = await fetch(`https://drizzletodo.vercel.app/api/tasks`, {
+    const res = await fetch(`${process.env.BASE_URL}/api/tasks`, {
       method: "GET",
       cache: "no-store",
       headers: {
