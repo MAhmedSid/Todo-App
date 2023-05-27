@@ -3,10 +3,9 @@ import React from "react";
 import AddTask from "./AddTask";
 import List from "../atoms/List";
 import Heading from "../atoms/Heading";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "../ui/tabs";
 
-
-
-import { Roboto } from "next/font/google"
+import { Roboto } from "next/font/google";
 import { Task } from "../../lib/drizzle";
 import { toast, ToastContainer } from "react-toastify";
 
@@ -19,11 +18,11 @@ const roboto = Roboto({
 
 const getData = async () => {
   try {
-    console.log(process.env.BASE_URL)
+    console.log(process.env.BASE_URL);
     const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/tasks`, {
       method: "GET",
-      cache: "no-store"
-    })
+      cache: "no-store",
+    });
     if (!res.ok) {
       throw new Error("Something went wrong");
     }
@@ -44,9 +43,18 @@ export const TodoComp = async () => {
     >
       <Heading />
       <div className="md:w-96 bg-black text-black backdrop-blur-lg shadow-xl bg-opacity-50 rounded-2xl flex flex-col items-center p-4">
-        {/* @ts-ignore */}
-        <List data={data} toast={toast} />
-        <AddTask toast={toast} />
+        <Tabs defaultValue="tasks" className="w-[400px]">
+          <TabsList>
+            <TabsTrigger value="tasks">Tasks</TabsTrigger>
+            <TabsTrigger value="lists">Lists</TabsTrigger>
+          </TabsList>
+          <TabsContent value="tasks">
+            {/* @ts-ignore */}
+            <List data={data} toast={toast} />
+            <AddTask toast={toast} />
+          </TabsContent>
+          <TabsContent value="lists">List Content</TabsContent>
+        </Tabs>
       </div>
       <ToastContainer
         position="top-right"

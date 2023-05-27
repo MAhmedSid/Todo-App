@@ -1,8 +1,7 @@
 "use client";
 
 import React, { useState, useTransition, useEffect } from "react";
-import { useRouter } from "next/navigation"
-
+import { useRouter } from "next/navigation";
 
 import { Task } from "../../lib/drizzle";
 
@@ -10,8 +9,6 @@ import { Reorder } from "framer-motion";
 import { TiDeleteOutline } from "react-icons/ti";
 
 const List = ({ data, toast }: { data: Task[]; toast: any }) => {
- 
-  
   const router = useRouter();
   const [items, setItems] = useState(data);
   const [isPending, startTransition] = useTransition();
@@ -61,34 +58,36 @@ const List = ({ data, toast }: { data: Task[]; toast: any }) => {
         onReorder={setItems}
         className="flex flex-col h-96 w-full gap-y-3 overflow-y-scroll mb-4 px-2  scrollbar-track-transparent scrollbar-thumb-rounded-lg scrollbar scrollbar-thumb-white"
       >
-        {items ? items.map((task: Task) => (
-          <Reorder.Item
-            value={task}
-            key={task.id}
-            className="flex bg-white rounded-lg p-4 bg-opacity-10 justify-between gap-x-4 cursor-grab"
-          >
-            <p className="md:max-w-[15rem] text-xl font-light text-white break-words">
-              {task.description}
-            </p>
-            {data.length > 3 && (
-              <button
-                disabled={isMutating}
-                onClick={() => {
-                  deleteTask(task.id);
-                }}
-                className="h-8"
+        {items
+          ? items.map((task: Task) => (
+              <Reorder.Item
+                value={task}
+                key={task.id}
+                className="flex bg-white rounded-lg p-4 bg-opacity-10 justify-between gap-x-4 cursor-grab"
               >
-                <TiDeleteOutline
-                  className={`text-3xl cursor-pointer text-white  ${
-                    isMutating
-                      ? "opacity-50 cursor-not-allowed"
-                      : " hover:text-red-600 hover:transition-all hover:duration-300 hover:ease-in-out hover:scale-125"
-                  }`}
-                />
-              </button>
-            )}
-          </Reorder.Item>
-        )) : "OOPS! Data have not loaded" }
+                <p className="md:max-w-[15rem] text-xl font-light text-white break-words">
+                  {task.description}
+                </p>
+                {data.length > 3 && (
+                  <button
+                    disabled={isMutating}
+                    onClick={() => {
+                      deleteTask(task.id);
+                    }}
+                    className="h-8"
+                  >
+                    <TiDeleteOutline
+                      className={`text-3xl cursor-pointer text-white  ${
+                        isMutating
+                          ? "opacity-50 cursor-not-allowed"
+                          : " hover:text-red-600 hover:transition-all hover:duration-300 hover:ease-in-out hover:scale-125"
+                      }`}
+                    />
+                  </button>
+                )}
+              </Reorder.Item>
+            ))
+          : "OOPS! Data have not loaded"}
       </Reorder.Group>
     </>
   );
