@@ -18,7 +18,6 @@ const roboto = Roboto({
 
 const getData = async () => {
   try {
-    console.log(process.env.BASE_URL);
     const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/tasks`, {
       method: "GET",
       cache: "no-store",
@@ -42,18 +41,23 @@ export const TodoComp = async () => {
       className={`${roboto.className} flex flex-col justify-center items-center gap-y-4 mx-4 md:mx-0`}
     >
       <Heading />
-      <div className="md:w-96 bg-black text-black backdrop-blur-lg shadow-xl bg-opacity-50 rounded-2xl flex flex-col items-center p-4">
-        <Tabs defaultValue="tasks" className="w-[400px]">
-          <TabsList>
-            <TabsTrigger value="tasks">Tasks</TabsTrigger>
-            <TabsTrigger value="lists">Lists</TabsTrigger>
+      <div className="md:w-96 h-[555px] md:h-[580px] bg-black text-black backdrop-blur-lg shadow-xl bg-opacity-50 rounded-2xl flex flex-col items-center p-4">
+        <Tabs defaultValue="tasks" className="w-full flex flex-col ">
+          <TabsList className="bg-transparent mb-4">
+            <TabsTrigger className="text-lg" value="tasks">
+              Tasks
+            </TabsTrigger>
+            <TabsTrigger className="text-lg " value="lists">
+              Lists
+            </TabsTrigger>
           </TabsList>
-          <TabsContent value="tasks">
-            {/* @ts-ignore */}
+          <TabsContent className="flex flex-col items-center" value="tasks">
             <List data={data} toast={toast} />
             <AddTask toast={toast} />
           </TabsContent>
-          <TabsContent value="lists">List Content</TabsContent>
+          <TabsContent className="text-white" value="lists">
+            List Content can be created, the database is ready...{" "}
+          </TabsContent>
         </Tabs>
       </div>
       <ToastContainer
